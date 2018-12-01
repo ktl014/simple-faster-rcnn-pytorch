@@ -11,7 +11,7 @@ from .util import read_image
 from utils.constants import *
 
 # Module level constants
-CLS_IDX = {'0': 0, 'person': 1, 'people':2, 'people?':3}
+CLS_IDX = {'0': 0, 'person': 1, 'people':2, 'person?':3, 'person-fa':1}
 
 class CaltechBboxDataset:
     """Bounding box dataset for Caltech Pedestrian"""
