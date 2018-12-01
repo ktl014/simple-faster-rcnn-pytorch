@@ -106,7 +106,7 @@ class Dataset:
         self.tsf = Transform(opt.min_size, opt.max_size)
 
     def __getitem__(self, idx):
-        ori_img, bbox, label, difficult = self.db.get_example(idx)
+        ori_img, bbox, label = self.db.get_example(idx)
 
         img, bbox, label, scale = self.tsf((ori_img, bbox, label))
         # TODO: check whose stride is negative to fix this instead copy all
@@ -124,9 +124,9 @@ class TestDataset:
         # self.db = VOCBboxDataset(opt.voc_data_dir, split=split, use_difficult=use_difficult)
 
     def __getitem__(self, idx):
-        ori_img, bbox, label, difficult = self.db.get_example(idx)
+        ori_img, bbox, label = self.db.get_example(idx)
         img = preprocess(ori_img)
-        return img, ori_img.shape[1:], bbox, label, difficult
+        return img, ori_img.shape[1:], bbox, label
 
     def __len__(self):
         return len(self.db)

@@ -11,6 +11,7 @@ from .util import read_image
 from utils.constants import *
 
 # Module level constants
+CLS_IDX = {'0': 0, 'person': 1, 'people':2, 'people?':3}
 
 class CaltechBboxDataset:
     """Bounding box dataset for Caltech Pedestrian"""
@@ -30,6 +31,8 @@ class CaltechBboxDataset:
         image = read_image(image_filename)
 
         bboxes = eval(self.data.loc[index, Col.COORD])
+        label = eval(self.data.loc[index, Col.LABEL])
+        
         bboxes = np.stack(bboxes).astype(np.float32)
-        label = np.array(0)
+        label = np.array([CLS_IDX[i] for i in label])
         return image, bboxes, label
